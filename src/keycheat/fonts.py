@@ -23,6 +23,8 @@ _SANS_CANDIDATES = [
     "C:/Windows/Fonts/arial.ttf",
     "/System/Library/Fonts/Supplemental/Arial.ttf",
     "/Library/Fonts/Arial.ttf",
+    "/mnt/c/Windows/Fonts/arial.ttf",
+    "/mnt/c/Windows/Fonts/segoeui.ttf",
 ]
 _SANS_BOLD_CANDIDATES = [
     "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
@@ -30,23 +32,29 @@ _SANS_BOLD_CANDIDATES = [
     "C:/Windows/Fonts/arialbd.ttf",
     "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
     "/Library/Fonts/Arial Bold.ttf",
+    "/mnt/c/Windows/Fonts/arialbd.ttf",
+    "/mnt/c/Windows/Fonts/segoeuib.ttf",
 ]
 _MONO_CANDIDATES = [
     "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
     "C:/Windows/Fonts/consola.ttf",
     "/System/Library/Fonts/Supplemental/Menlo.ttc",
     "/Library/Fonts/Menlo.ttc",
+    "/mnt/c/Windows/Fonts/consola.ttf",
 ]
 _MONO_BOLD_CANDIDATES = [
     "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
     "C:/Windows/Fonts/consolab.ttf",
+    "/mnt/c/Windows/Fonts/consolab.ttf",
 ]
 
 
 class FontSet:
     """Resolved font names to hand to reportlab ParagraphStyles."""
 
-    def __init__(self, sans: str, sans_bold: str, mono: str, mono_bold: str, unicode_ok: bool):
+    def __init__(
+        self, sans: str, sans_bold: str, mono: str, mono_bold: str, unicode_ok: bool
+    ):
         self.sans = sans
         self.sans_bold = sans_bold
         self.mono = mono
@@ -79,7 +87,9 @@ def resolve_fonts(
     want a specific look).
     """
     sans = _register("KCSans", _SANS_CANDIDATES, [font_regular] if font_regular else [])
-    sans_bold = _register("KCSansBold", _SANS_BOLD_CANDIDATES, [font_bold] if font_bold else [])
+    sans_bold = _register(
+        "KCSansBold", _SANS_BOLD_CANDIDATES, [font_bold] if font_bold else []
+    )
     mono = _register("KCMono", _MONO_CANDIDATES, [font_mono] if font_mono else [])
     mono_bold = _register(
         "KCMonoBold", _MONO_BOLD_CANDIDATES, [font_mono_bold] if font_mono_bold else []
