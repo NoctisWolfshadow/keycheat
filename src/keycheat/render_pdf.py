@@ -165,17 +165,19 @@ def render_pdf(
             for s in section.shortcuts
         ]
 
-        # Glue the header to at least its first row so a section title never
-        # ends up alone at the bottom of a column with its table starting in
-        # the next one. The remaining rows are free to flow/split normally,
-        # matching how the reference sheet lets long sections span columns.
-        head_rows = rows[:1]
-        rest_rows = rows[1:]
+        # Glue the header to its first couple of rows so a section title
+        # never ends up alone at the bottom of a column with its table
+        # starting in the next one. The remaining rows are free to
+        # flow/split normally, matching how the reference sheet lets long
+        # sections span columns.
+        lock_count = min(2, len(rows))
+        head_rows = rows[:lock_count]
+        rest_rows = rows[lock_count:]
 
         block = [header, Spacer(1, 3), make_table(head_rows, start_index=0)]
         story.append(KeepTogether(block))
         if rest_rows:
-            story.append(make_table(rest_rows, start_index=1))
+            story.append(make_table(rest_rows, start_index=lock_count))
         story.append(Spacer(1, 9))
 
     doc.build(story)
