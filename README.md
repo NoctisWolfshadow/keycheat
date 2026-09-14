@@ -1,5 +1,7 @@
 # keycheat
 
+This a vibe-coded project. I just needed something simple and working.
+
 Turn a TOML file of keyboard shortcuts into a clean, newspaper-column
 cheat sheet - as HTML and/or PDF. Styled after the classic
 [VS Code keyboard shortcut PDFs](https://aka.ms/vscodekeybindings):
@@ -22,7 +24,7 @@ uv run keycheat examples/vscode-windows.toml
 ```
 
 This writes `examples/vscode-windows.html` and `examples/vscode-windows.pdf`
-next to the config file. See that file for a full worked example.
+next to the config file. See that file for a fully working example.
 
 ```
 usage: keycheat [-h] [-o OUTPUT] [--format {html,pdf,both}]
@@ -55,7 +57,7 @@ footer = "Optional small print shown at the bottom"
 "Ctrl+Shift+P" = "Show Command Palette"
 
 [File management]
-"<leader> S" = "Save All"
+"<leader>+S" = "Save All"
 ```
 
 - **`title` / `subtitle` / `footer`** are all optional strings shown at the
