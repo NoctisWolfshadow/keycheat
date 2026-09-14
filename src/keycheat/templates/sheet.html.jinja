@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ title or "Keyboard Shortcuts" }}</title>
+<style>
+  :root {
+    --ink: #1f1f1f;
+    --muted: #6e6e6e;
+    --faint: #9a9a9a;
+    --rule: #d9d9d9;
+    --row-alt: #f6f6f7;
+    --accent: #0066b8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 2.2rem 2.6rem 1.6rem;
+    background: #ffffff;
+    color: var(--ink);
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+  }
+
+  header.sheet-head {
+    margin-bottom: 1.4rem;
+  }
+
+  header.sheet-head h1 {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  header.sheet-head p.subtitle {
+    margin: 0.2rem 0 0;
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .columns {
+    columns: {{ columns }};
+    column-gap: 2.6rem;
+  }
+
+  section.group {
+    break-inside: auto;
+    margin-bottom: 0.6rem;
+  }
+
+  section.group h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--rule);
+    break-after: avoid-column;
+    break-inside: avoid-column;
+  }
+
+  table.shortcuts {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.9rem;
+  }
+
+  table.shortcuts tr {
+    break-inside: avoid-column;
+  }
+
+  table.shortcuts tr:nth-child(even) {
+    background: var(--row-alt);
+  }
+
+  table.shortcuts td {
+    padding: 0.2rem 0.4rem;
+    vertical-align: top;
+    line-height: 1.35;
+  }
+
+  table.shortcuts td.keys {
+    font-family: "Cascadia Code", "Consolas", "SFMono-Regular", Menlo, monospace;
+    font-weight: 600;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    padding-right: 0.9rem;
+    width: 1%;
+  }
+
+  table.shortcuts td.desc {
+    font-size: 0.86rem;
+    color: #333333;
+  }
+
+  footer.sheet-foot {
+    margin-top: 1.2rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.78rem;
+    color: var(--faint);
+  }
+
+  @media print {
+    body { padding: 0.5in 0.6in; }
+    .columns { columns: {{ columns }}; }
+  }
+</style>
+</head>
+<body>
+  <header class="sheet-head">
+    <h1>{{ title or "Keyboard Shortcuts" }}</h1>
+    {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
+  </header>
+
+  <div class="columns">
+    {% for section in sections %}
+    <section class="group">
+      <h2>{{ section.name }}</h2>
+      <table class="shortcuts">
+        {% for shortcut in section.shortcuts %}
+        <tr>
+          <td class="keys">{{ shortcut.keys }}</td>
+          <td class="desc">{{ shortcut.description }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </section>
+    {% endfor %}
+  </div>
+
+  {% if footer %}
+  <footer class="sheet-foot">{{ footer }}</footer>
+  {% endif %}
+</body>
+</html>
