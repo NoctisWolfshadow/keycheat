@@ -15,6 +15,11 @@ Is Project is a mirror of my own hosted [Forgejo Instance](https://forgejo.nocti
 
 If you have Problems or want to ask something please head to here.
 
+## Disclaimer
+
+If you find a Problem or Bug.
+Please create a Issue on the Forgejo Instance where you explain and also add Context.
+
 ## Install
 
 Requires [uv](https://docs.astral.sh/uv/).
