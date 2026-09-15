@@ -3,6 +3,7 @@ name = "keycheat"
 version = "0.1.0"
 description = "Render a TOML keyboard-shortcut config into a newspaper-column HTML/PDF cheat sheet"
 readme = "README.md"
+license = { file = "license.txt" }
 requires-python = ">=3.11"
 dependencies = [
     "jinja2>=3.1.6",
