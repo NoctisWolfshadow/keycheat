@@ -8,6 +8,14 @@
 #              to the <leader> key in Neovim. Handy for chorded shortcuts
 #              like VS Code's "Ctrl+K, ..." family below.
 #   footer   - small print at the bottom of the sheet
+#   fonts    - optional table pinning PDF fonts; see README > Fonts (PDF).
+#              Uncomment to try it (any of the 4 keys can be set alone):
+#
+#              [fonts]
+#              regular   = "C:/Windows/Fonts/segoeui.ttf"
+#              bold      = "C:/Windows/Fonts/segoeuib.ttf"
+#              mono      = "C:/Windows/Fonts/consola.ttf"
+#              mono_bold = "C:/Windows/Fonts/consolab.ttf"
 #
 # Every other top-level table becomes one section on the sheet, in the order
 # it appears in this file. Inside a section, each entry is:
