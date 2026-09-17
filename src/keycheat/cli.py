@@ -39,7 +39,8 @@ def build_parser() -> argparse.ArgumentParser:
         "--pagesize",
         choices=["letter", "a4"],
         default="letter",
-        help="PDF page size, rendered landscape (default: letter)",
+        help="Page size, rendered landscape - used by the PDF and by the "
+             "HTML's print stylesheet (default: letter)",
     )
     parser.add_argument(
         "--font-regular", type=Path, default=None,
@@ -80,7 +81,7 @@ def main(argv: list[str] | None = None) -> int:
     out_base.parent.mkdir(parents=True, exist_ok=True)
 
     if args.format in ("html", "both"):
-        html = render_html(sheet, columns=args.columns)
+        html = render_html(sheet, columns=args.columns, pagesize=args.pagesize)
         html_path = out_base.with_suffix(".html")
         html_path.write_text(html, encoding="utf-8")
         print(f"Wrote {html_path}")

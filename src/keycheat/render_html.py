@@ -1,5 +1,6 @@
-"""Renders a Sheet into a standalone HTML document using CSS multi-column
-layout, so it flows like a newspaper page both on screen and when printed."""
+"""Renders a Sheet into a standalone HTML document: CSS multi-column
+layout on screen, and a clean single-column, correctly paged layout when
+printed (see the template's @media print comment for why those differ)."""
 
 from __future__ import annotations
 
@@ -12,7 +13,7 @@ from .model import Sheet
 _TEMPLATE_DIR = Path(__file__).parent / "templates"
 
 
-def render_html(sheet: Sheet, columns: int = 3) -> str:
+def render_html(sheet: Sheet, columns: int = 3, pagesize: str = "letter") -> str:
     env = Environment(
         loader=FileSystemLoader(str(_TEMPLATE_DIR)),
         autoescape=select_autoescape(["html"]),
@@ -24,4 +25,5 @@ def render_html(sheet: Sheet, columns: int = 3) -> str:
         footer=sheet.footer,
         sections=sheet.sections,
         columns=columns,
+        pagesize=pagesize,
     )

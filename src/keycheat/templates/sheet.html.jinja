@@ -112,9 +112,23 @@
     color: var(--faint);
   }
 
+  @page {
+    size: {{ 'A4' if pagesize == 'a4' else 'letter' }} landscape;
+    margin: 0.5in 0.6in;
+  }
+
+  /* Browsers don't reliably fragment a CSS multi-column layout across
+     printed pages (support varies a lot by engine/version) - the columns
+     rule that works nicely on screen can silently collapse to one giant
+     column, overflow sideways, or leave blank pages when printed. Rather
+     than gamble on that, print falls back to a single reflowing column,
+     which browsers paginate correctly and predictably. For an exact match
+     to the PDF's multi-column page layout, use the generated PDF directly
+     - that's what it's for. */
   @media print {
-    body { padding: 0.5in 0.6in; }
-    .columns { columns: {{ columns }}; }
+    body { padding: 0; }
+    .columns { columns: 1; }
+    section.group { break-inside: avoid; }
   }
 </style>
 </head>
