@@ -190,9 +190,21 @@ engines so they stay visually consistent without a heavyweight
 HTML-to-PDF conversion step (which would need system libraries like
 Pango/Cairo that are painful to install on Windows):
 
-- **HTML** uses a plain CSS `columns` layout - open it in any browser and
-  Ctrl/Cmd+P to print your own PDF if you'd rather use the browser's
-  renderer.
+- **HTML, on screen**, uses a plain CSS `columns` layout - the same
+  newspaper-style flow as the PDF.
+- **HTML, printed**, deliberately switches to a single reflowing column
+  instead (see the `@media print` block in the template). Browsers don't
+  reliably fragment a CSS multi-column layout across printed pages -
+  support varies a lot by engine/version, and in testing it silently
+  collapsed to one column, overflowed sideways, or produced blank pages.
+  A single column is something every browser paginates correctly and
+  predictably, so that's what you get if you Ctrl/Cmd+P the HTML - clean
+  and correctly paged, but not the same column count as the PDF. `@page`
+  is set from `--pagesize` (landscape), so at least page size/orientation
+  line up with the PDF.
+- **For an exact match to the PDF's multi-column page layout**, use the
+  generated PDF directly rather than printing the HTML - that's precisely
+  what it's for.
 - **PDF** uses [ReportLab](https://www.reportlab.com/), with a page
   template of side-by-side frames that content flows through automatically
   (the same idiom used for newsletter layouts), so a long section can
